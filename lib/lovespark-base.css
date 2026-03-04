@@ -1,90 +1,43 @@
+/* lovespark-base.css — Shared variables, themes, and base styles
+   Canonical source: Extensions/infrastructure/lovespark-shared-lib/
+   Copy to each extension's lib/ folder via scripts/sync-shared-lib.sh */
+
 :root {
+  /* Background gradient */
   --ls-bg-pink-light: #FDCFE1;
   --ls-bg-pink: #F9A8C9;
   --ls-bg-pink-deep: #F48CAF;
   --ls-bg-gradient: linear-gradient(165deg, #FDCFE1 0%, #F9A8C9 40%, #F48CAF 100%);
 
+  /* Frosted glass surfaces */
   --ls-glass: rgba(255, 255, 255, 0.45);
   --ls-glass-light: rgba(255, 255, 255, 0.25);
   --ls-glass-border: rgba(255, 255, 255, 0.4);
+  --ls-glass-strong: rgba(255, 255, 255, 0.6);
 
+  /* Accents */
   --ls-pink-accent: #E8457C;
+  --ls-pink-deep: #D63466;
+  --ls-white: #FFFFFF;
+  --ls-purple: #7C3AED;
+  --ls-teal: #0D9488;
+  --ls-blue: #818CF8;
+
+  /* Text */
   --ls-text-dark: #5C1A36;
   --ls-text-muted: #9E4D6E;
   --ls-text-white: #FFFFFF;
 
+  /* Effects */
   --ls-glow: 0 0 16px rgba(232, 69, 124, 0.3);
+  --ls-glow-strong: 0 0 24px rgba(232, 69, 124, 0.45);
+  --ls-glow-white: 0 0 16px rgba(255, 255, 255, 0.5);
+
+  /* Layout */
   --ls-radius: 14px;
+  --ls-radius-sm: 10px;
   --ls-font-body: 'DM Mono', monospace;
   --ls-font-display: 'Press Start 2P', cursive;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  width: 320px;
-  font-family: var(--ls-font-body);
-  background: var(--ls-bg-gradient);
-  color: var(--ls-text-dark);
-}
-
-.popup-container { padding: 16px; }
-
-.popup-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-  font-family: var(--ls-font-display);
-  font-size: 10px;
-  color: var(--ls-text-white);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
-  position: relative;
-}
-
-.popup-icon { font-size: 20px; }
-
-.stats-card {
-  background: var(--ls-glass);
-  border: 1px solid var(--ls-glass-border);
-  border-radius: var(--ls-radius);
-  padding: 16px;
-  margin-bottom: 12px;
-  backdrop-filter: blur(8px);
-}
-
-.stats-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-}
-
-.stats-row + .stats-row {
-  border-top: 1px solid var(--ls-glass-border);
-}
-
-.stats-label { font-size: 13px; }
-
-.stats-value {
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--ls-pink-accent);
-  transition: all 0.3s ease;
-}
-
-.message {
-  text-align: center;
-  font-size: 13px;
-  color: var(--ls-text-dark);
-  padding: 4px 0;
-}
-
-.popup-footer {
-  margin-top: 16px;
-  text-align: center;
-  font-size: 11px;
-  color: var(--ls-text-muted);
 }
 
 /* ── Theme: Dark (LoveSpark Noir) ─────────────────────── */
@@ -170,9 +123,90 @@ body.theme-slate {
   --ls-radius-sm: 4px;
 }
 
-/* ── Theme Tab ────────────────────────────────────────── */
+/* ── Theme Dropdown ───────────────────────────────────── */
+.theme-dropdown {
+  position: relative;
+  z-index: 100;
+  margin-left: auto;
+}
+
+.theme-dropdown-trigger {
+  background: var(--ls-glass);
+  border: 1px solid var(--ls-glass-border);
+  border-radius: var(--ls-radius-sm);
+  padding: 4px 10px;
+  font-size: 10px;
+  font-family: inherit;
+  color: var(--ls-text-dark);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.theme-dropdown-trigger:hover {
+  background: var(--ls-glass-strong);
+  box-shadow: var(--ls-glow);
+}
+
+.theme-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: var(--ls-glass-strong);
+  border: 1px solid var(--ls-glass-border);
+  border-radius: var(--ls-radius-sm);
+  backdrop-filter: blur(12px);
+  min-width: 140px;
+  padding: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+}
+
+.theme-dropdown-menu.open { display: block; }
+
+.theme-dropdown-header {
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--ls-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 6px 10px 4px;
+}
+
+.theme-option {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 7px 10px;
+  font-family: inherit;
+  font-size: 11px;
+  color: var(--ls-text-dark);
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.theme-option:hover { background: var(--ls-glass); }
+.theme-option.active { color: var(--ls-pink-accent); font-weight: 500; }
+
 body { transition: background 0.3s ease, color 0.3s ease; }
 
+/* ── Pop animation ──────────────────────────────────── */
+@keyframes pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.25); color: var(--ls-pink-deep); }
+  100% { transform: scale(1); }
+}
+.popping { animation: pop 0.35s ease; }
+
+/* ── Accessibility ──────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .stats-value { transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
