@@ -1,3 +1,5 @@
+> **📦 Moved.** This extension now lives in the LoveSpark monorepo: **[Joona-t/lovespark-extensions/privacy/lovespark-reddit-promoted-block](https://github.com/Joona-t/lovespark-extensions/tree/main/privacy/lovespark-reddit-promoted-block)** (full history kept). This repo is archived and read-only.
+
 # LoveSpark Reddit Promoted Block
 
 Hides promoted posts and ads on Reddit — new Reddit, old Reddit, and sidebar ads.
